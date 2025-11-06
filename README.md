@@ -38,8 +38,8 @@ Aşağıdaki ortam değişkenlerini kendi makinenize uygun şekilde ayarlayın:
 
 Windows (PowerShell):
 ```powershell
-$env:DB_NAME="linkedin_clone"
-$env:DB_USER="postgres"
+$env:DB_NAME="linkedln"
+$env:DB_USER="linkedin_user"
 $env:DB_PASSWORD="postgres"
 $env:DB_HOST="127.0.0.1"
 $env:DB_PORT="5432"
@@ -47,8 +47,8 @@ $env:DB_PORT="5432"
 
 macOS/Linux (bash):
 ```bash
-export DB_NAME=linkedin_clone
-export DB_USER=postgres
+export DB_NAME=linkedln
+export DB_USER=linkedin_user
 export DB_PASSWORD=postgres
 export DB_HOST=127.0.0.1
 export DB_PORT=5432
