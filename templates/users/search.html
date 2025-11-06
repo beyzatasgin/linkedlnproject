@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Kullanıcı Ara - LinkedIn Klonu{% endblock %}
+{% block content %}
+<section class="card" style="margin-top:0">
+  <form method="get" action="" style="display:flex;gap:8px;align-items:center">
+    <input type="text" name="q" value="{{ q }}" placeholder="Kullanıcı adı ara" style="flex:1" />
+    <button class="btn" type="submit">Ara</button>
+  </form>
+</section>
+
+<section class="card">
+  <h3 style="margin:0 0 8px 0">Sonuçlar</h3>
+  <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+    {% for u in results %}
+      <li style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:8px;padding:8px 10px;">
+        <a href="{% url 'profile_detail' u.username %}">{{ u.username }}</a>
+        <a class="btn btn-small btn-ghost" href="{% url 'connection_send' u.username %}">Bağlantı İsteği</a>
+      </li>
+    {% empty %}
+      <li>Sonuç bulunamadı.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
+
+

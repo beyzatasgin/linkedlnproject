@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Profil - LinkedIn Klonu{% endblock %}
+{% block content %}
+<section class="profile card">
+  <header class="profile-header">
+    {% if profile.avatar %}
+      <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" />
+    {% else %}
+      <div class="avatar" style="background:#e5e7eb;display:flex;align-items:center;justify-content:center;color:#6b7280;">
+        {{ profile.user.username|first|upper }}
+      </div>
+    {% endif %}
+    <div>
+      <h2 style="margin:0;">{{ profile.user.username }}</h2>
+      <p style="margin:4px 0;color:var(--muted);">{{ profile.headline }}</p>
+      <p style="margin:4px 0;color:var(--muted);">{{ profile.location }}</p>
+      {% if profile.website %}<a href="{{ profile.website }}" target="_blank">Web</a>{% endif %}
+    </div>
+  </header>
+  {% if profile.bio %}
+    <p style="white-space:pre-wrap;">{{ profile.bio }}</p>
+  {% endif %}
+  {% if is_owner %}
+    <a class="btn" href="{% url 'profile_edit' %}">Profili Düzenle</a>
+  {% else %}
+    <a class="btn btn-ghost" href="{% url 'connection_send' profile.user.username %}">Bağlantı İsteği Gönder</a>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3 style="margin:0 0 8px 0">Gönderiler</h3>
+  {% for post in posts %}
+    <article class="post card" style="margin:10px 0 0 0">
+      <header class="post-header">
+        <div><strong>{{ post.author.username }}</strong></div>
+        <small>{{ post.created_at|date:"d.m.Y H:i" }}</small>
+      </header>
+      <div class="post-content"><p style="margin-top:8px;white-space:pre-wrap;">{{ post.content }}</p></div>
+    </article>
+  {% empty %}
+    <p>Henüz gönderi yok.</p>
+  {% endfor %}
+</section>
+{% endblock %}
+
+

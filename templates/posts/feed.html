@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Akış - LinkedIn Klonu{% endblock %}
+{% block content %}
+<div class="grid">
+  <div>
+    <form method="post" action="{% url 'post_create' %}" class="card composer">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div style="display:flex;justify-content:flex-end;">
+        <button type="submit" class="btn">Paylaş</button>
+      </div>
+    </form>
+
+    {% for post in posts %}
+      <article class="post card">
+        <header class="post-header">
+          <div><strong>{{ post.author.username }}</strong></div>
+          <small>{{ post.created_at|date:"d.m.Y H:i" }}</small>
+        </header>
+        <div class="post-content"><p style="margin-top:8px;white-space:pre-wrap;">{{ post.content }}</p></div>
+        <footer class="post-actions" style="margin-top:10px;">
+          <a class="btn btn-ghost" href="{% url 'post_like_toggle' post.id %}">Beğen ({{ post.likes.count }})</a>
+          {% if post.author == user %}
+            <a class="btn btn-ghost danger" href="{% url 'post_delete' post.id %}">Sil</a>
+          {% endif %}
+        </footer>
+      </article>
+    {% empty %}
+      <p>Henüz gönderi yok.</p>
+    {% endfor %}
+  </div>
+  <aside>
+    <div class="card">
+      <h3>Bağlantılar</h3>
+      <p><a href="{% url 'connections_list' %}">Bağlantı İstekleri ve Listesi</a></p>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+
+

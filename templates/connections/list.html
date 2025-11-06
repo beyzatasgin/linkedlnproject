@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Bağlantılar - LinkedIn Klonu{% endblock %}
+{% block content %}
+<h1 style="margin-top:0">Bağlantılar</h1>
+
+<div class="grid-2">
+  <div class="card">
+    <h3 style="margin-top:0">Gelen İstekler</h3>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+      {% for c in received %}
+        <li style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:8px;padding:8px 10px;">
+          <a href="{% url 'profile_detail' c.from_user.username %}">{{ c.from_user.username }}</a>
+          <span style="display:flex;gap:6px">
+            <a class="btn btn-small" href="{% url 'connection_accept' c.from_user.username %}">Kabul Et</a>
+            <a class="btn btn-small btn-ghost" href="{% url 'connection_reject' c.from_user.username %}">Reddet</a>
+          </span>
+        </li>
+      {% empty %}
+        <li>Bekleyen istek yok.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Gönderilen İstekler</h3>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+      {% for c in sent %}
+        <li style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:8px;padding:8px 10px;">
+          <a href="{% url 'profile_detail' c.to_user.username %}">{{ c.to_user.username }}</a>
+          <span style="display:flex;gap:6px;align-items:center">
+            <span style="color:var(--muted);font-size:12px">Beklemede</span>
+            <a class="btn btn-small btn-ghost" href="{% url 'connection_cancel' c.to_user.username %}">İptal Et</a>
+          </span>
+        </li>
+      {% empty %}
+        <li>Gönderilen istek yok.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Bağlantı Listesi</h3>
+  <ul style="list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px">
+    {% for c in accepted_from %}
+      <li style="border:1px solid var(--border);border-radius:8px;padding:8px 10px"><a href="{% url 'profile_detail' c.to_user.username %}">{{ c.to_user.username }}</a></li>
+    {% endfor %}
+    {% for c in accepted_to %}
+      <li style="border:1px solid var(--border);border-radius:8px;padding:8px 10px"><a href="{% url 'profile_detail' c.from_user.username %}">{{ c.from_user.username }}</a></li>
+    {% empty %}
+      <li>Bağlantı yok.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+

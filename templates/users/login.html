@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Giriş - LinkedIn Klonu{% endblock %}
+{% block content %}
+<div class="card" style="max-width:420px;margin:24px auto;">
+  <h2 style="margin:0 0 12px 0;">Giriş Yap</h2>
+  <p style="color:var(--muted);margin-top:0;">Hesabınıza giriş yapın.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p style="display:flex;align-items:center;gap:8px">
+      <input type="checkbox" id="remember_me" name="remember_me" />
+      <label for="remember_me" style="margin:0">Beni hatırla</label>
+    </p>
+    <p style="margin:8px 0"><a href="{% url 'password_reset' %}">Şifremi unuttum?</a></p>
+    <button type="submit" class="btn" style="width:100%">Giriş</button>
+    <input type="hidden" name="next" value="{% url 'feed' %}" />
+  </form>
+  <p style="margin-top:12px;color:var(--muted);">Hesabın yok mu? <a href="{% url 'register' %}">Kayıt ol</a></p>
+</div>
+{% endblock %}
+
+
