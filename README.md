@@ -88,8 +88,11 @@ Varsayılan adres: `http://127.0.0.1:8000`
 - Bağlantılar: http://127.0.0.1:8000/connections/
 - Arama: http://127.0.0.1:8000/search/
 - Şifre Sıfırla: http://127.0.0.1:8000/password-reset/
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b302674 (UI: modern tema ve CSS cache-bust (styles.css?v=2))
 
 ## Medya ve Statik Dosyalar
 - Yüklenen avatarlar `media/` altında tutulur.
