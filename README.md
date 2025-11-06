@@ -76,18 +76,19 @@ python manage.py runserver
 Varsayılan adres: `http://127.0.0.1:8000`
 
 ## Kullanım Linkleri
-- Kayıt: `/register/`
-- Giriş: `/login/`
-- Çıkış: `/logout/`
-- Akış (feed): `/`
-- Profilim: `/profile/`
-- Başkası: `/u/<kullanıcıadı>/`
-- Gönderi Oluştur: `POST /posts/create/`
-- Gönderi Sil: `/posts/<id>/delete/`
-- Beğeni: `/posts/<id>/like/`
-- Bağlantılar: `/connections/` (gönder/kabul/ret/iptal)
-- Arama: `/search/`
-- Şifre Sıfırla: `/password-reset/`
+-Kayıt: http://127.0.0.1:8000/register/
+- Giriş: http://127.0.0.1:8000/login/
+- Çıkış: http://127.0.0.1:8000/logout/
+- Akış (feed): http://127.0.0.1:8000/
+- Profilim: http://127.0.0.1:8000/profile/
+- Başkası (örnek): http://127.0.0.1:8000/u/kullaniciadi/
+- Gönderi Oluştur (POST): http://127.0.0.1:8000/posts/create/
+- Gönderi Sil (örnek): http://127.0.0.1:8000/posts/1/delete/
+- Beğeni (örnek): http://127.0.0.1:8000/posts/1/like/
+- Bağlantılar: http://127.0.0.1:8000/connections/
+- Arama: http://127.0.0.1:8000/search/
+- Şifre Sıfırla: http://127.0.0.1:8000/password-reset/
+
 
 ## Medya ve Statik Dosyalar
 - Yüklenen avatarlar `media/` altında tutulur.
