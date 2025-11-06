@@ -76,7 +76,7 @@ python manage.py runserver
 Varsayılan adres: `http://127.0.0.1:8000`
 
 ## Kullanım Linkleri
--Kayıt: http://127.0.0.1:8000/register/
+- Kayıt: http://127.0.0.1:8000/register/
 - Giriş: http://127.0.0.1:8000/login/
 - Çıkış: http://127.0.0.1:8000/logout/
 - Akış (feed): http://127.0.0.1:8000/
@@ -88,6 +88,7 @@ Varsayılan adres: `http://127.0.0.1:8000`
 - Bağlantılar: http://127.0.0.1:8000/connections/
 - Arama: http://127.0.0.1:8000/search/
 - Şifre Sıfırla: http://127.0.0.1:8000/password-reset/
+
 
 
 ## Medya ve Statik Dosyalar
