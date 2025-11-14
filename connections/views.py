@@ -41,25 +41,3 @@ def accept_request_view(request, username: str):
     return redirect("connections_list")
 
 
-
-@login_required
-def reject_request_view(request, username: str):
-    from_user = get_object_or_404(User, username=username)
-    conn = get_object_or_404(
-        Connection, from_user=from_user, to_user=request.user, status=Connection.Status.PENDING
-    )
-    conn.delete()
-    messages.success(request, "Bağlantı isteği reddedildi")
-    return redirect("connections_list")
-
-
-@login_required
-def cancel_request_view(request, username: str):
-    to_user = get_object_or_404(User, username=username)
-    conn = get_object_or_404(
-        Connection, from_user=request.user, to_user=to_user, status=Connection.Status.PENDING
-    )
-    conn.delete()
-    messages.success(request, "Bağlantı isteği iptal edildi")
-    return redirect("connections_list")
-

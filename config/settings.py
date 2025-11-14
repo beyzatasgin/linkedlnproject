@@ -102,9 +102,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "feed"
 LOGOUT_REDIRECT_URL = "login"
-LOGIN_URL = "login"
-
-# Dev email backend: print emails to console
-EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 
 

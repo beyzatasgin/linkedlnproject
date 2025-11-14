@@ -5,13 +5,11 @@ from django.contrib.auth import login, logout
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from .forms import ProfileForm, RegisterForm
 from .models import Profile
-from posts.models import Post
 
 
 def register_view(request):
@@ -36,12 +34,7 @@ def profile_view(request, username: str | None = None):
     else:
         profile, _ = Profile.objects.get_or_create(user=request.user)
         is_owner = True
-    user_posts = Post.objects.filter(author=profile.user).select_related("author")
-    return render(
-        request,
-        "users/profile.html",
-        {"profile": profile, "is_owner": is_owner, "posts": user_posts},
-    )
+    return render(request, "users/profile.html", {"profile": profile, "is_owner": is_owner})
 
 
 @login_required
@@ -75,19 +68,5 @@ def logout_view(request):
     logout(request)
     messages.success(request, "Başarıyla çıkış yaptınız.")
     return redirect("login")
-
-
-
-@login_required
-def user_search_view(request):
-    query = request.GET.get("q", "").strip()
-    results = []
-    if query:
-        results = (
-            User.objects.filter(username__icontains=query)
-            .exclude(id=request.user.id)
-            .order_by("username")[:50]
-        )
-    return render(request, "users/search.html", {"q": query, "results": results})
 
 

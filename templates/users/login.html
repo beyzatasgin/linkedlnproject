@@ -11,7 +11,6 @@
       <input type="checkbox" id="remember_me" name="remember_me" />
       <label for="remember_me" style="margin:0">Beni hatırla</label>
     </p>
-    <p style="margin:8px 0"><a href="{% url 'password_reset' %}">Şifremi unuttum?</a></p>
     <button type="submit" class="btn" style="width:100%">Giriş</button>
     <input type="hidden" name="next" value="{% url 'feed' %}" />
   </form>

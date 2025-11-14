@@ -6,7 +6,7 @@
     {% if profile.avatar %}
       <img class="avatar" src="{{ profile.avatar.url }}" alt="avatar" />
     {% else %}
-      <div class="avatar" style="background:#0b1220;display:flex;align-items:center;justify-content:center;color:#9ca3af;">
+      <div class="avatar" style="background:#e5e7eb;display:flex;align-items:center;justify-content:center;color:#6b7280;">
         {{ profile.user.username|first|upper }}
       </div>
     {% endif %}
@@ -25,21 +25,6 @@
   {% else %}
     <a class="btn btn-ghost" href="{% url 'connection_send' profile.user.username %}">Bağlantı İsteği Gönder</a>
   {% endif %}
-</section>
-
-<section class="card">
-  <h3 style="margin:0 0 8px 0">Gönderiler</h3>
-  {% for post in posts %}
-    <article class="post card" style="margin:10px 0 0 0">
-      <header class="post-header">
-        <div><strong>{{ post.author.username }}</strong></div>
-        <small>{{ post.created_at|date:"d.m.Y H:i" }}</small>
-      </header>
-      <div class="post-content"><p style="margin-top:8px;white-space:pre-wrap;">{{ post.content }}</p></div>
-    </article>
-  {% empty %}
-    <p>Henüz gönderi yok.</p>
-  {% endfor %}
 </section>
 {% endblock %}
 
