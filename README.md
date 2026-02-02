@@ -38,8 +38,9 @@ Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve
   
 ### PostgreSQL
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d83bb4d6-e236-4dfc-9172-268ce985362e" width="800" />
+  <img src="https://github.com/user-attachments/assets/5a0feb7b-ede2-4570-a1c1-c5a201d1956a" width="800" />
 </p>
+
 ## 🚀 Özellikler
 - ✅ Kullanıcı kayıt ve giriş sistemi (JWT Authentication)
 - ✅ Profil yönetimi (başlık, bio, konum, web sitesi, avatar)
