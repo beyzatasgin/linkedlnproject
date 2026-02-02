@@ -1,0 +1,127 @@
+.connections-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.connections-header {
+  margin-bottom: 20px;
+}
+
+.connections-header h2 {
+  color: #0a66c2;
+  margin-bottom: 15px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-buttons button {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.filter-buttons button:hover {
+  background: #f3f2ef;
+}
+
+.filter-buttons button.active {
+  background: #0a66c2;
+  color: white;
+  border-color: #0a66c2;
+}
+
+.connections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.connection-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.connection-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.connection-info strong {
+  color: #0a66c2;
+  font-size: 18px;
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  width: fit-content;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-accepted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.connection-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-accept {
+  padding: 8px 16px;
+  background: #0a66c2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-accept:hover {
+  background: #004182;
+}
+
+.btn-reject {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid #d11124;
+  color: #d11124;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-reject:hover {
+  background: #ffeef0;
+}
+
+.loading,
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+

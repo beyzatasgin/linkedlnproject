@@ -1,0 +1,162 @@
+.feed-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.feed-header {
+  margin-bottom: 20px;
+}
+
+.feed-header h2 {
+  color: #0a66c2;
+}
+
+.post-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.post-form textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.post-form textarea:focus {
+  outline: none;
+  border-color: #0a66c2;
+}
+
+.post-form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-form-footer span {
+  color: #666;
+  font-size: 14px;
+}
+
+.post-form-footer button {
+  padding: 8px 20px;
+  background: #0a66c2;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.post-form-footer button:hover:not(:disabled) {
+  background: #004182;
+}
+
+.post-form-footer button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.post-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-author {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post-author strong {
+  color: #0a66c2;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #d11124;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.btn-delete:hover {
+  background: #ffeef0;
+}
+
+.post-content {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.post-actions {
+  display: flex;
+  gap: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.btn-like {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-like:hover {
+  background: #f3f2ef;
+}
+
+.btn-like.liked {
+  background: #ffeef0;
+  border-color: #d11124;
+  color: #d11124;
+}
+
+.loading,
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+

@@ -1,22 +1,21 @@
 # Software Design Document (SDD)
-## LinkedIn Benzeri Sosyal Ağ Platformu
 
-**Versiyon:** 1.0  
-**Tarih:** Kasım 2025  
-**Hazırlayan:** Proje Ekibi  
-**Durum:** Tamamlandı
+## LinkedIn Benzeri Sosyal Ağ Platformu
 
 ---
 
 ## 1. Giriş
 
 ### 1.1 Dokümanın Amacı
+
 Bu doküman, Django ve PostgreSQL kullanılarak geliştirilen LinkedIn benzeri sosyal ağ platformunun yazılım tasarımını detaylandırmaktadır. Sistem, kullanıcıların profesyonel profiller oluşturmasına, gönderi paylaşmasına ve diğer kullanıcılarla bağlantı kurmasına olanak sağlamaktadır.
 
 ### 1.2 Kapsam
+
 Bu doküman, sistemin genel mimarisi, gereksinimler, veritabanı tasarımı, arayüz tasarımı ve teknik detayları içermektedir.
 
 ### 1.3 Tanımlar ve Kısaltmalar
+
 - **SDD:** Software Design Document (Yazılım Tasarım Dokümanı)
 - **API:** Application Programming Interface
 - **CRUD:** Create, Read, Update, Delete
@@ -25,6 +24,7 @@ Bu doküman, sistemin genel mimarisi, gereksinimler, veritabanı tasarımı, ara
 - **MVT:** Model-View-Template (Django mimarisi)
 
 ### 1.4 Referanslar
+
 - Django Documentation: https://docs.djangoproject.com/
 - PostgreSQL Documentation: https://www.postgresql.org/docs/
 - IEEE 1016-2009: Software Design Description
@@ -34,6 +34,7 @@ Bu doküman, sistemin genel mimarisi, gereksinimler, veritabanı tasarımı, ara
 ## 2. Sistem Genel Mimarisi
 
 ### 2.1 Mimari Genel Bakış
+
 Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmiştir. Üç katmanlı bir mimari yapı kullanılmaktadır:
 
 1. **Sunum Katmanı (Presentation Layer):** HTML/CSS template'leri
@@ -43,16 +44,19 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 ### 2.2 Sistem Bileşenleri
 
 #### 2.2.1 Kullanıcı Yönetimi Modülü (users)
+
 - Kullanıcı kayıt ve giriş işlemleri
 - Profil yönetimi (oluşturma, görüntüleme, düzenleme)
 - Avatar yükleme
 
 #### 2.2.2 Gönderi Modülü (posts)
+
 - Gönderi oluşturma, listeleme, silme
 - Beğeni sistemi
 - Gönderi akışı (feed)
 
 #### 2.2.3 Bağlantı Modülü (connections)
+
 - Bağlantı isteği gönderme
 - Bağlantı isteği kabul etme
 - Bağlantı listesi görüntüleme
@@ -60,16 +64,19 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 ### 2.3 Teknoloji Stack
 
 **Backend:**
+
 - Django 5.0.6
 - Python 3.x
 - PostgreSQL (psycopg3)
 
 **Frontend:**
+
 - HTML5
 - CSS3
 - Django Template Engine
 
 **Araçlar:**
+
 - Pillow (resim işleme)
 - Django Admin Panel
 
@@ -109,6 +116,7 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 ### 3.1 Fonksiyonel Gereksinimler
 
 #### FR1: Kullanıcı Yönetimi
+
 - **FR1.1:** Kullanıcılar yeni hesap oluşturabilmelidir (kullanıcı adı, e-posta, şifre)
 - **FR1.2:** Kullanıcılar mevcut hesaplarıyla giriş yapabilmelidir
 - **FR1.3:** Kullanıcılar "Beni Hatırla" özelliğini kullanabilmelidir
@@ -118,17 +126,20 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 - **FR1.7:** Kullanıcılar diğer kullanıcıların profillerini görüntüleyebilmelidir
 
 #### FR2: Gönderi Yönetimi
+
 - **FR2.1:** Kullanıcılar gönderi oluşturabilmelidir (maksimum 1500 karakter)
 - **FR2.2:** Kullanıcılar tüm gönderileri akış sayfasında görebilmelidir
 - **FR2.3:** Kullanıcılar sadece kendi gönderilerini silebilmelidir
 - **FR2.4:** Gönderiler tarih sırasına göre (en yeni önce) listelenmelidir
 
 #### FR3: Beğeni Sistemi
+
 - **FR3.1:** Kullanıcılar gönderilere beğeni ekleyebilmelidir
 - **FR3.2:** Kullanıcılar beğenilerini kaldırabilmelidir
 - **FR3.3:** Her gönderide toplam beğeni sayısı gösterilmelidir
 
 #### FR4: Bağlantı Yönetimi
+
 - **FR4.1:** Kullanıcılar diğer kullanıcılara bağlantı isteği gönderebilmelidir
 - **FR4.2:** Kullanıcılar gelen bağlantı isteklerini görebilmelidir
 - **FR4.3:** Kullanıcılar gelen bağlantı isteklerini kabul edebilmelidir
@@ -138,21 +149,25 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 ### 3.2 Fonksiyonel Olmayan Gereksinimler
 
 #### NFR1: Performans
+
 - Sayfa yükleme süresi 2 saniyeden az olmalıdır
 - Veritabanı sorguları optimize edilmelidir (select_related kullanımı)
 
 #### NFR2: Güvenlik
+
 - Kullanıcı şifreleri hash'lenerek saklanmalıdır (Django default)
 - CSRF koruması aktif olmalıdır
 - SQL injection koruması (ORM kullanımı)
 - XSS koruması (Django template auto-escaping)
 
 #### NFR3: Kullanılabilirlik
+
 - Arayüz responsive olmalıdır (mobil uyumlu)
 - Kullanıcı dostu navigasyon menüsü
 - Hata mesajları Türkçe olmalıdır
 
 #### NFR4: Bakım Kolaylığı
+
 - Kod modüler yapıda olmalıdır (app bazlı)
 - Dokümantasyon mevcut olmalıdır
 - Django best practices'e uygun olmalıdır
@@ -217,6 +232,7 @@ linkedin/
 ### 4.3 View Fonksiyonları
 
 #### 4.3.1 Kullanıcı View'ları
+
 - `register_view()`: Yeni kullanıcı kaydı
 - `LoginViewWithRemember`: Giriş (beni hatırla özellikli)
 - `logout_view()`: Çıkış
@@ -224,12 +240,14 @@ linkedin/
 - `profile_edit_view()`: Profil düzenleme
 
 #### 4.3.2 Gönderi View'ları
+
 - `feed_view()`: Ana akış sayfası
 - `post_create_view()`: Gönderi oluşturma
 - `post_delete_view()`: Gönderi silme
 - `like_toggle_view()`: Beğeni ekleme/kaldırma
 
 #### 4.3.3 Bağlantı View'ları
+
 - `connections_list_view()`: Bağlantı listesi
 - `send_request_view()`: Bağlantı isteği gönderme
 - `accept_request_view()`: Bağlantı isteği kabul
@@ -243,6 +261,7 @@ linkedin/
 Sistem, PostgreSQL veritabanında aşağıdaki tabloları kullanmaktadır:
 
 #### 5.1.1 Django Varsayılan Tablolar
+
 - `auth_user`: Django'nun kullanıcı tablosu
 - `auth_group`: Grup tablosu
 - `auth_permission`: İzin tablosu
@@ -303,6 +322,7 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ```
 
 ### 5.3 Veritabanı Optimizasyonları
+
 - Foreign key'lerde `select_related()` kullanımı (N+1 sorgu problemini önler)
 - Gönderi listesinde `select_related("author")` kullanımı
 - Index'ler Django tarafından otomatik oluşturulur (Foreign Key'ler için)
@@ -312,6 +332,7 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ## 6. Arayüz Tasarımı
 
 ### 6.1 Genel Tasarım Prensipleri
+
 - **Renk Paleti:** LinkedIn benzeri mavi tonları (#0a66c2)
 - **Tipografi:** Sistem fontları (system-ui, -apple-system)
 - **Layout:** Responsive grid yapısı
@@ -320,24 +341,28 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ### 6.2 Sayfa Tasarımları
 
 #### 6.2.1 Ana Sayfa (Feed)
+
 - Üst kısımda gönderi oluşturma formu
 - Alt kısımda gönderi listesi (en yeni önce)
 - Her gönderide: yazar, tarih, içerik, beğeni butonu, sil butonu (sadece kendi gönderileri için)
 - Sağ tarafta bağlantılar widget'ı
 
 #### 6.2.2 Giriş/Kayıt Sayfaları
+
 - Merkezi kart tasarımı
 - Form alanları: kullanıcı adı, e-posta, şifre
 - "Beni Hatırla" checkbox'ı (sadece giriş)
 - Kayıt sayfasında şifre doğrulama alanı
 
 #### 6.2.3 Profil Sayfası
+
 - Profil başlığı: avatar, kullanıcı adı, başlık, konum
 - Biyografi bölümü
 - Profil düzenleme butonu (sadece kendi profili)
 - Bağlantı isteği gönderme butonu (diğer kullanıcı profilleri)
 
 #### 6.2.4 Bağlantılar Sayfası
+
 - İki sütunlu grid: Gelen İstekler, Gönderilen İstekler
 - Her istek için kullanıcı adı ve aksiyon butonu
 - Alt kısımda kabul edilmiş bağlantı listesi
@@ -345,7 +370,7 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ### 6.3 Arayüz Tasarımı Görüntüleri
 
 > **Not:** Bu bölüm, projenin çalışır haldeki ekran görüntüleri ile doldurulacaktır. Aşağıdaki ekranlar için görüntüler eklenecektir:
-> 
+>
 > 1. Ana Sayfa (Feed) - Gönderi listesi
 > 2. Giriş Sayfası
 > 3. Kayıt Sayfası
@@ -353,7 +378,7 @@ auth_user (1) ──── (N) connections_connection (to_user)
 > 5. Profil Düzenleme Sayfası
 > 6. Bağlantılar Sayfası
 > 7. Diğer Kullanıcı Profili
-> 
+>
 > Ekran görüntüleri `docs/screenshots/` klasörüne eklenecektir.
 
 ---
@@ -361,16 +386,19 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ## 7. Güvenlik Tasarımı
 
 ### 7.1 Kimlik Doğrulama
+
 - Django'nun built-in authentication sistemi kullanılmaktadır
 - Şifreler PBKDF2 algoritması ile hash'lenmektedir
 - Oturum yönetimi Django session framework ile yapılmaktadır
 
 ### 7.2 Yetkilendirme
+
 - `@login_required` decorator'ı ile korumalı sayfalar
 - Kullanıcılar sadece kendi gönderilerini silebilir
 - Profil düzenleme sadece kendi profili için mümkün
 
 ### 7.3 Güvenlik Önlemleri
+
 - **CSRF Protection:** Tüm formlarda CSRF token kullanımı
 - **SQL Injection:** ORM kullanımı ile korunma
 - **XSS:** Django template auto-escaping
@@ -381,11 +409,13 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ## 8. Test Stratejisi
 
 ### 8.1 Test Türleri
+
 - **Unit Testler:** Model ve form testleri
 - **Integration Testler:** View ve URL testleri
 - **Manuel Testler:** Kullanıcı akışları
 
 ### 8.2 Test Senaryoları
+
 1. Kullanıcı kayıt ve giriş akışı
 2. Gönderi oluşturma, silme, beğenme
 3. Bağlantı isteği gönderme ve kabul etme
@@ -396,6 +426,7 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ## 9. Kurulum ve Çalıştırma
 
 ### 9.1 Gereksinimler
+
 - Python 3.8+
 - PostgreSQL 12+
 - pip (Python paket yöneticisi)
@@ -403,12 +434,14 @@ auth_user (1) ──── (N) connections_connection (to_user)
 ### 9.2 Kurulum Adımları
 
 1. **Projeyi klonla:**
+
 ```bash
 git clone <repository-url>
 cd linkedin
 ```
 
 2. **Sanal ortam oluştur:**
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # Linux/Mac
@@ -417,11 +450,13 @@ source .venv/bin/activate  # Linux/Mac
 ```
 
 3. **Bağımlılıkları yükle:**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 4. **PostgreSQL veritabanı oluştur:**
+
 ```sql
 CREATE DATABASE linkedin;
 CREATE USER linkedin_user WITH PASSWORD 'your_password';
@@ -429,6 +464,7 @@ ALTER DATABASE linkedin OWNER TO linkedin_user;
 ```
 
 5. **Ortam değişkenlerini ayarla:**
+
 ```bash
 export DB_NAME=linkedin
 export DB_USER=linkedin_user
@@ -438,53 +474,37 @@ export DB_PORT=5432
 ```
 
 6. **Migration'ları çalıştır:**
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 7. **Süper kullanıcı oluştur:**
+
 ```bash
 python manage.py createsuperuser
 ```
 
 8. **Sunucuyu başlat:**
+
 ```bash
 python manage.py runserver
 ```
 
 ### 9.3 Erişim
+
 - Ana uygulama: http://127.0.0.1:8000/
 - Admin paneli: http://127.0.0.1:8000/admin/
 
 ---
-
-## 10. Sonuç ve Gelecek Geliştirmeler
-
-### 10.1 Tamamlanan Özellikler
-✅ Kullanıcı kayıt ve giriş sistemi  
-✅ Profil yönetimi  
-✅ Gönderi paylaşma ve silme  
-✅ Beğeni sistemi  
-✅ Bağlantı isteği gönderme ve kabul etme  
-✅ Modern ve responsive arayüz  
-
-### 10.2 Gelecek Geliştirmeler
-- [ ] Yorum sistemi
-- [ ] Bildirim sistemi
-- [ ] Mesajlaşma özelliği
-- [ ] Arama fonksiyonu
-- [ ] React frontend entegrasyonu
-- [ ] API geliştirme (REST API)
-- [ ] Dosya yükleme (gönderilere resim ekleme)
-- [ ] Hashtag sistemi
-- [ ] Profil görüntüleme istatistikleri
 
 ---
 
 ## Ekler
 
 ### Ek A: Teknoloji Versiyonları
+
 - Django: 5.0.6
 - Python: 3.x
 - PostgreSQL: 12+
@@ -492,14 +512,7 @@ python manage.py runserver
 - Pillow: 10.4.0
 
 ### Ek B: Proje Yapısı
+
 Detaylı proje yapısı için `README.md` dosyasına bakınız.
 
-### Ek C: API Dokümantasyonu
-API geliştirildiğinde bu bölüm güncellenecektir.
-
 ---
-
-**Doküman Versiyonu:** 1.0  
-**Son Güncelleme:** Kasım 2025  
-**Hazırlayan:** Proje Ekibi
-

@@ -1,210 +1,56 @@
 # LinkedIn Benzeri Sosyal Ağ Platformu
 
-Django ve PostgreSQL kullanılarak geliştirilmiş profesyonel sosyal ağ platformu. Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve diğer kullanıcılarla bağlantı kurabilir.
+Django REST Framework, React ve PostgreSQL kullanılarak geliştirilmiş profesyonel sosyal ağ platformu. Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve diğer kullanıcılarla bağlantı kurabilir.
 
-## 🚀 Özellikler
+## Özellikler
 
-- ✅ Kullanıcı kayıt ve giriş sistemi (Beni Hatırla özelliği ile)
+- ✅ Kullanıcı kayıt ve giriş sistemi (JWT Authentication)
 - ✅ Profil yönetimi (başlık, bio, konum, web sitesi, avatar)
 - ✅ Gönderi paylaşma, silme ve listeleme
 - ✅ Beğeni sistemi
 - ✅ Bağlantı isteği gönderme ve kabul etme
-- ✅ Modern ve responsive arayüz (HTML/CSS)
+- ✅ Modern React frontend (Vite)
+- ✅ RESTful API (Django REST Framework)
 - ✅ Django Admin paneli
 
-## 🛠️ Teknolojiler
+## Teknolojiler
 
-- **Backend:** Django 5.0.6
+- **Backend:** Django 5.0.6 + Django REST Framework
+- **Frontend:** React 18 + Vite
 - **Veritabanı:** PostgreSQL (psycopg3)
-- **Frontend:** HTML5, CSS3
+- **Authentication:** JWT (Simple JWT)
 - **Python:** 3.x
+- **Node.js:** 18+
 
-## 📋 Gereksinimler
+## Gereksinimler
 
 - Python 3.8+
 - PostgreSQL 12+
+- Node.js 18+
+- npm veya yarn
 - pip
 
-## 🔧 Kurulum
+## Kurulum
 
-### 1. Projeyi Klonlayın
+Kurulum adımları için `SETUP.md` dosyasına bakın. Örnek ortam değişkenleri `env.example` içinde.
 
-```bash
-git clone <repository-url>
-cd linkedin
-```
+## Linkler
 
-### 2. Sanal Ortam Oluşturun
+- React: `http://localhost:3000`
+- API: `http://127.0.0.1:8000/api/`
+- Admin: `http://127.0.0.1:8000/admin/`
 
-**Windows:**
-```bash
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
+## GitHub’a yükleme
 
-**Linux/Mac:**
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-### 3. Bağımlılıkları Yükleyin
+`.env` dosyasını commit etmeyin (`.gitignore` dışarıda bırakıyor).
 
 ```bash
-pip install -r requirements.txt
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin <repo-url>
+git push -u origin main
 ```
 
-### 4. PostgreSQL Veritabanı Oluşturun
 
-pgAdmin4 veya psql kullanarak:
-
-```sql
-CREATE DATABASE linkedin;
-CREATE USER linkedin_user WITH PASSWORD 'your_password';
-ALTER DATABASE linkedin OWNER TO linkedin_user;
-```
-
-### 5. Ortam Değişkenlerini Ayarlayın
-
-**Windows PowerShell:**
-```powershell
-$env:DB_NAME="linkedin"
-$env:DB_USER="linkedin_user"
-$env:DB_PASSWORD="your_password"
-$env:DB_HOST="127.0.0.1"
-$env:DB_PORT="5432"
-$env:DJANGO_DEBUG="1"
-```
-
-**Linux/Mac:**
-```bash
-export DB_NAME=linkedin
-export DB_USER=linkedin_user
-export DB_PASSWORD=your_password
-export DB_HOST=127.0.0.1
-export DB_PORT=5432
-export DJANGO_DEBUG=1
-```
-
-### 6. Migration'ları Çalıştırın
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### 7. Süper Kullanıcı Oluşturun
-
-```bash
-python manage.py createsuperuser
-```
-
-### 8. Sunucuyu Başlatın
-
-```bash
-python manage.py runserver
-```
-
-## 🌐 Erişim
-
-- **Ana Uygulama:** http://127.0.0.1:8000/
-- **Admin Paneli:** http://127.0.0.1:8000/admin/
-
-## 📁 Proje Yapısı
-
-```
-linkedin/
-├── config/              # Ana proje ayarları
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── users/               # Kullanıcı yönetimi
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   └── urls.py
-├── posts/               # Gönderi modülü
-│   ├── models.py
-│   ├── views.py
-│   ├── forms.py
-│   └── urls.py
-├── connections/         # Bağlantı modülü
-│   ├── models.py
-│   ├── views.py
-│   └── urls.py
-├── templates/           # HTML template'leri
-│   ├── base.html
-│   ├── users/
-│   ├── posts/
-│   └── connections/
-├── static/              # CSS dosyaları
-│   └── css/
-│       └── styles.css
-├── docs/                # Dokümantasyon
-│   └── SDD.md
-├── manage.py
-└── requirements.txt
-```
-
-## 📸 Ekran Görüntüleri
-
-> Ekran görüntüleri `docs/screenshots/` klasörüne eklenecektir.
-
-## 🔐 Güvenlik
-
-- CSRF koruması aktif
-- SQL injection koruması (ORM kullanımı)
-- XSS koruması (Django template auto-escaping)
-- Şifreler PBKDF2 ile hash'leniyor
-
-## 📚 Dokümantasyon
-
-Detaylı sistem tasarım dokümanı için [SDD.md](docs/SDD.md) dosyasına bakınız.
-
-## 🗺️ URL Yapısı
-
-- `/` - Ana sayfa (Feed)
-- `/login/` - Giriş
-- `/register/` - Kayıt
-- `/logout/` - Çıkış
-- `/profile/` - Profil
-- `/profile/edit/` - Profil düzenleme
-- `/u/<username>/` - Kullanıcı profili
-- `/posts/create/` - Gönderi oluştur
-- `/posts/<id>/delete/` - Gönderi sil
-- `/posts/<id>/like/` - Beğeni
-- `/connections/` - Bağlantılar
-- `/admin/` - Admin paneli
-
-## 🧪 Test
-
-```bash
-python manage.py test
-```
-
-## 📝 Lisans
-
-Bu proje eğitim amaçlı geliştirilmiştir.
-
-## 👥 Katkıda Bulunanlar
-
-- Proje Ekibi
-
-## 🔮 Gelecek Geliştirmeler
-
-- [ ] Yorum sistemi
-- [ ] Bildirim sistemi
-- [ ] Mesajlaşma özelliği
-- [ ] Arama fonksiyonu
-- [ ] React frontend entegrasyonu
-- [ ] REST API geliştirme
-- [ ] Dosya yükleme (gönderilere resim)
-- [ ] Hashtag sistemi
-
-## 📞 İletişim
-
-Sorularınız için issue açabilirsiniz.
-
----
-
-**Not:** Bu proje Django öğrenme amaçlı geliştirilmiştir.
