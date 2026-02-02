@@ -2,8 +2,14 @@
 
 Django REST Framework, React ve PostgreSQL kullanılarak geliştirilmiş profesyonel bir sosyal ağ platformu.  
 Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve diğer kullanıcılarla bağlantı kurabilir.
-## 📸 Ekran Görüntüleri
 
+## 🔗 Linkler
+- **Giriş:**http://127.0.0.1:8000/login/?next=/
+- **React:** http://localhost:3000
+- **API:** http://127.0.0.1:8000/api/
+- **Admin:** http://127.0.0.1:8000/admin/
+
+---
 ### Giriş Sayfası
 <p align="center">
   <img src="https://github.com/user-attachments/assets/87346b36-77f7-435d-87c7-1ca46d79421e" width="800" />
@@ -79,14 +85,6 @@ Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve
 
 Kurulum adımları için `SETUP.md` dosyasına bakın.  
 Örnek ortam değişkenleri `.env.example` içinde yer almaktadır.
-
----
-
-## 🔗 Linkler
-- **Giriş:**http://127.0.0.1:8000/login/?next=/
-- **React:** http://localhost:3000
-- **API:** http://127.0.0.1:8000/api/
-- **Admin:** http://127.0.0.1:8000/admin/
 
 ---
 
