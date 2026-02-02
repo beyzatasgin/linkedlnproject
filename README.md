@@ -4,14 +4,14 @@ Django REST Framework, React ve PostgreSQL kullanılarak geliştirilmiş profesy
 Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve diğer kullanıcılarla bağlantı kurabilir.
 ## 📸 Ekran Görüntüleri
 
-![Giriş Sayfası](<img width="403" height="445" alt="giris" src="https://github.com/user-attachments/assets/87346b36-77f7-435d-87c7-1ca46d79421e" />
-)
----
+### Giriş Sayfası
+![Giriş Sayfası](https://github.com/user-attachments/assets/87346b36-77f7-435d-87c7-1ca46d79421e)
 
-![Kayıt Ol ](<img width="496" height="751" alt="kayitol" src="https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43" />
-)
+### Kayıt Ol
+![Kayıt Ol](https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43)
 
-
+### Kayıt Ol
+![Ana Sayfa ](https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43)
 ## 🚀 Özellikler
 - ✅ Kullanıcı kayıt ve giriş sistemi (JWT Authentication)
 - ✅ Profil yönetimi (başlık, bio, konum, web sitesi, avatar)
