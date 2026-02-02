@@ -52,8 +52,10 @@ def profile_edit_view(request):
 
 
 class LoginViewWithRemember(auth_views.LoginView):
+    template_name = "users/login.html"
+    redirect_authenticated_user = True
+
     def form_valid(self, form):
-        response = super().form_valid(form)
         remember = self.request.POST.get("remember_me")
         if remember:
             # 14 gün hatırla
@@ -61,7 +63,14 @@ class LoginViewWithRemember(auth_views.LoginView):
         else:
             # Tarayıcı kapanınca sonlanır
             self.request.session.set_expiry(0)
-        return response
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # next parametresini kontrol et
+        next_url = self.request.GET.get("next") or self.request.POST.get("next")
+        if next_url:
+            return next_url
+        return super().get_success_url()
 
 
 def logout_view(request):

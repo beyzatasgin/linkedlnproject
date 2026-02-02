@@ -70,17 +70,29 @@ WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
 
 
-# PostgreSQL (psycopg3)
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "linkedin_clone"),
-        "USER": os.getenv("DB_USER", "linkedin_user"),
-        "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "127.0.0.1"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+# Database
+#
+# If DB_PASSWORD is not set, we fall back to SQLite for a zero-config dev start.
+# To use PostgreSQL, export DB_PASSWORD (and the other DB_* variables as needed).
+_db_password = os.getenv("DB_PASSWORD")
+if _db_password is None:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME", "linkedin_clone"),
+            "USER": os.getenv("DB_USER", "linkedin_user"),
+            "PASSWORD": _db_password,
+            "HOST": os.getenv("DB_HOST", "127.0.0.1"),
+            "PORT": os.getenv("DB_PORT", "5432"),
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [

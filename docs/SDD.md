@@ -35,11 +35,11 @@ Bu doküman, sistemin genel mimarisi, gereksinimler, veritabanı tasarımı, ara
 
 ### 2.1 Mimari Genel Bakış
 
-Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmiştir. Üç katmanlı bir mimari yapı kullanılmaktadır:
+Sistem, **Django REST Framework + React SPA** mimarisiyle geliştirilmiştir. Üç katmanlı bir mimari yapı kullanılmaktadır:
 
-1. **Sunum Katmanı (Presentation Layer):** HTML/CSS template'leri
-2. **İş Mantığı Katmanı (Business Logic Layer):** Django Views ve Forms
-3. **Veri Katmanı (Data Layer):** PostgreSQL veritabanı ve Django ORM
+1. **Sunum Katmanı (Frontend / Presentation Layer):** React (Vite) SPA
+2. **İş Mantığı Katmanı (Backend / Business Logic Layer):** Django REST Framework API'leri
+3. **Veri Katmanı (Data Layer):** PostgreSQL (ve geliştirme için opsiyonel SQLite) + Django ORM
 
 ### 2.2 Sistem Bileşenleri
 
@@ -71,9 +71,9 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 
 **Frontend:**
 
-- HTML5
-- CSS3
-- Django Template Engine
+- React 18 (Vite)
+- React Router
+- Axios
 
 **Araçlar:**
 
@@ -83,30 +83,25 @@ Sistem, Django'nun MVT (Model-View-Template) mimarisini kullanarak geliştirilmi
 ### 2.4 Sistem Mimarisi Diyagramı
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Kullanıcı Tarayıcısı                  │
-│                  (HTML/CSS/JavaScript)                   │
-└────────────────────┬────────────────────────────────────┘
-                     │ HTTP/HTTPS
-┌────────────────────▼────────────────────────────────────┐
-│              Django Web Framework                        │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │   Templates  │  │    Views     │  │    Forms     │  │
-│  │   (HTML)     │  │  (Logic)     │  │ (Validation) │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │    Models    │  │     URLs     │  │  Middleware  │  │
-│  │   (ORM)      │  │  (Routing)   │  │  (Security)  │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-└────────────────────┬────────────────────────────────────┘
-                     │ SQL
-┌────────────────────▼────────────────────────────────────┐
-│              PostgreSQL Veritabanı                       │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │   Users      │  │    Posts     │  │ Connections  │  │
-│  │   Tables     │  │    Tables    │  │    Tables    │  │
-│  └──────────────┘  └──────────────┘  └──────────────┘  │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                    Kullanıcı Tarayıcısı                      │
+│                       (React SPA)                            │
+└───────────────────────┬──────────────────────────────────────┘
+                        │ HTTP (JSON, REST)
+┌───────────────────────▼──────────────────────────────────────┐
+│                    Django REST API                           │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │ ViewSets     │  │ Serializers  │  │ Permissions  │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
+│  ┌──────────────┐  ┌──────────────┐                         │
+│  │ Models (ORM) │  │ URL Router   │                         │
+│  └──────────────┘  └──────────────┘                         │
+└───────────────────────┬──────────────────────────────────────┘
+                        │ SQL
+┌───────────────────────▼──────────────────────────────────────┐
+│                   PostgreSQL / SQLite                        │
+│      (Users, Profiles, Posts, Likes, Connections)            │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -338,48 +333,45 @@ auth_user (1) ──── (N) connections_connection (to_user)
 - **Layout:** Responsive grid yapısı
 - **Kartlar:** Gölgeli, yuvarlatılmış köşeli kartlar
 
-### 6.2 Sayfa Tasarımları
+### 6.2 Sayfa Tasarımları (React)
 
-#### 6.2.1 Ana Sayfa (Feed)
+- **Giriş Sayfası (`/login`)**
+  - Ortada kart içinde kullanıcı adı/şifre formu
+  - Başarısız girişlerde kırmızı hata alanı
 
-- Üst kısımda gönderi oluşturma formu
-- Alt kısımda gönderi listesi (en yeni önce)
-- Her gönderide: yazar, tarih, içerik, beğeni butonu, sil butonu (sadece kendi gönderileri için)
-- Sağ tarafta bağlantılar widget'ı
+- **Kayıt Sayfası (`/register`)**
+  - Ad/soyad, kullanıcı adı, e-posta, şifre/şifre tekrar alanları
+  - Hata mesajları formun üstünde gösterilir
 
-#### 6.2.2 Giriş/Kayıt Sayfaları
+- **Akış Sayfası (`/feed`)**
+  - Üstte gönderi oluşturma textarea + “Paylaş” butonu
+  - Altta kart yapısında gönderi listesi, beğeni ve sil butonları
 
-- Merkezi kart tasarımı
-- Form alanları: kullanıcı adı, e-posta, şifre
-- "Beni Hatırla" checkbox'ı (sadece giriş)
-- Kayıt sayfasında şifre doğrulama alanı
+- **Profil Sayfası (`/profile`)**
+  - Sol tarafta avatar, sağda kullanıcı adı, başlık, bio, konum, website
+  - “Düzenle” butonu ile inline düzenleme formu
 
-#### 6.2.3 Profil Sayfası
+- **Bağlantılar Sayfası (`/connections`)**
+  - Filtre butonları: Tümü / Bekleyen / Kabul Edilen
+  - Her bağlantı kartında kullanıcı adı ve durum rozeti
 
-- Profil başlığı: avatar, kullanıcı adı, başlık, konum
-- Biyografi bölümü
-- Profil düzenleme butonu (sadece kendi profili)
-- Bağlantı isteği gönderme butonu (diğer kullanıcı profilleri)
+### 6.3 Arayüz Ekran Görüntüleri
 
-#### 6.2.4 Bağlantılar Sayfası
+Aşağıdaki dosya adlarıyla `docs/screenshots/` klasörüne ekran görüntüleri eklenebilir:
 
-- İki sütunlu grid: Gelen İstekler, Gönderilen İstekler
-- Her istek için kullanıcı adı ve aksiyon butonu
-- Alt kısımda kabul edilmiş bağlantı listesi
+- `docs/screenshots/login.png` – Giriş ekranı  
+- `docs/screenshots/register.png` – Kayıt ekranı  
+- `docs/screenshots/feed.png` – Akış / gönderi listesi  
+- `docs/screenshots/profile.png` – Profil ekranı  
+- `docs/screenshots/profile-edit.png` – Profil düzenleme  
+- `docs/screenshots/connections.png` – Bağlantılar sayfası  
 
-### 6.3 Arayüz Tasarımı Görüntüleri
+Örnek kullanım (Markdown):
 
-> **Not:** Bu bölüm, projenin çalışır haldeki ekran görüntüleri ile doldurulacaktır. Aşağıdaki ekranlar için görüntüler eklenecektir:
->
-> 1. Ana Sayfa (Feed) - Gönderi listesi
-> 2. Giriş Sayfası
-> 3. Kayıt Sayfası
-> 4. Profil Sayfası (Kendi profili)
-> 5. Profil Düzenleme Sayfası
-> 6. Bağlantılar Sayfası
-> 7. Diğer Kullanıcı Profili
->
-> Ekran görüntüleri `docs/screenshots/` klasörüne eklenecektir.
+```markdown
+![Giriş Ekranı](screenshots/login.png)
+![Kayıt Ekranı](screenshots/register.png)
+```
 
 ---
 
