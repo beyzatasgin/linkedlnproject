@@ -83,6 +83,7 @@ Kurulum adımları için `SETUP.md` dosyasına bakın.
 ---
 
 ## 🔗 Linkler
+- **Giriş:**http://127.0.0.1:8000/login/?next=/
 - **React:** http://localhost:3000
 - **API:** http://127.0.0.1:8000/api/
 - **Admin:** http://127.0.0.1:8000/admin/
