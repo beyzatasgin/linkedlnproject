@@ -10,8 +10,18 @@ Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve
 ### Kayıt Ol
 ![Kayıt Ol](https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43)
 
-### Kayıt Ol
-![Ana Sayfa ](https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43)
+### Ana Sayfa
+<p align="center"> <img src="https://github.com/user-attachments/assets/4c09d5c1-55b8-4908-9f75-701bbc1d89e8" width="800" /> </p>
+
+### Bağlantılar
+<p align="center"> <img src="https://github.com/user-attachments/assets/fa22f64b-737d-43a3-b125-a1d4e89dc7d5" width="800" /> </p>
+
+### Profil
+<p align="center"> <img src="https://github.com/user-attachments/assets/fcfcf24d-a363-4e02-ac14-0afc16ce8c33" width="800" /> </p>
+
+### Profil Düzenleme
+<p align="center"> <img src="https://github.com/user-attachments/assets/21395649-ffc5-4fd4-9ac4-46fe76453e36" width="800" /> </p>
+
 ## 🚀 Özellikler
 - ✅ Kullanıcı kayıt ve giriş sistemi (JWT Authentication)
 - ✅ Profil yönetimi (başlık, bio, konum, web sitesi, avatar)
