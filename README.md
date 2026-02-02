@@ -5,10 +5,13 @@ Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve
 ## 📸 Ekran Görüntüleri
 
 ### Giriş Sayfası
-![Giriş Sayfası](https://github.com/user-attachments/assets/87346b36-77f7-435d-87c7-1ca46d79421e)
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/87346b36-77f7-435d-87c7-1ca46d79421e" width="800" />
+</p>
 ### Kayıt Ol
-![Kayıt Ol](https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3db03287-3497-4880-803a-3ece99bcac43" width="800" />
+</p>
 
 ### Ana Sayfa
 <p align="center"> <img src="https://github.com/user-attachments/assets/4c09d5c1-55b8-4908-9f75-701bbc1d89e8" width="800" /> </p>
@@ -22,6 +25,15 @@ Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve
 ### Profil Düzenleme
 <p align="center"> <img src="https://github.com/user-attachments/assets/21395649-ffc5-4fd4-9ac4-46fe76453e36" width="800" /> </p>
 
+### Django Yönetimi 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d83bb4d6-e236-4dfc-9172-268ce985362e" width="800" />
+</p
+  
+### PostgreSQL
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d83bb4d6-e236-4dfc-9172-268ce985362e" width="800" />
+</p>
 ## 🚀 Özellikler
 - ✅ Kullanıcı kayıt ve giriş sistemi (JWT Authentication)
 - ✅ Profil yönetimi (başlık, bio, konum, web sitesi, avatar)
