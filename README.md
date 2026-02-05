@@ -4,7 +4,7 @@ Django REST Framework, React ve PostgreSQL kullanılarak geliştirilmiş profesy
 Kullanıcılar profiller oluşturabilir, gönderi paylaşabilir, beğenebilir ve diğer kullanıcılarla bağlantı kurabilir.
 
 ## 🔗 Linkler
-- **Giriş:** http://127.0.0.1:8000/login/?next=/
+- **Giriş:** http://127.0.0.1:8000/login/
 - **React:** http://localhost:3000
 - **API:** http://127.0.0.1:8000/api/
 - **Admin:** http://127.0.0.1:8000/admin/
