@@ -6,6 +6,8 @@ const Connections = () => {
   const [connections, setConnections] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all') // all, pending, accepted
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
 
   useEffect(() => {
     fetchConnections()
@@ -43,6 +45,34 @@ const Connections = () => {
     }
   }
 
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    const q = query.trim()
+    if (!q) {
+      setResults([])
+      return
+    }
+    try {
+      const response = await api.get('/users/search/', { params: { q } })
+      setResults(response.data)
+    } catch (error) {
+      console.error('Search error:', error)
+      alert('Arama sırasında bir hata oluştu')
+    }
+  }
+
+  const sendConnectionRequest = async (userId) => {
+    try {
+      await api.post('/connections/send_request/', { to_user_id: userId })
+      alert('Bağlantı isteği gönderildi')
+    } catch (error) {
+      console.error('Send request error:', error)
+      alert(
+        error.response?.data?.error || 'Bağlantı isteği gönderilemedi'
+      )
+    }
+  }
+
   if (loading) {
     return <div className="loading">Yükleniyor...</div>
   }
@@ -51,6 +81,15 @@ const Connections = () => {
     <div className="connections-container">
       <div className="connections-header">
         <h2>Bağlantılar</h2>
+        <form className="search-form" onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Kullanıcı ara..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit">Ara</button>
+        </form>
         <div className="filter-buttons">
           <button
             className={filter === 'all' ? 'active' : ''}
@@ -72,6 +111,31 @@ const Connections = () => {
           </button>
         </div>
       </div>
+
+      {results.length > 0 && (
+        <div className="search-results">
+          <h3>Kullanıcı Arama Sonuçları</h3>
+          {results.map((user) => (
+            <div key={user.id} className="search-result-card">
+              <div className="search-result-info">
+                <strong>@{user.username}</strong>
+                {(user.first_name || user.last_name) && (
+                  <span>
+                    {user.first_name} {user.last_name}
+                  </span>
+                )}
+              </div>
+              <button
+                className="btn-accept"
+                type="button"
+                onClick={() => sendConnectionRequest(user.id)}
+              >
+                Bağlantı isteği gönder
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="connections-list">
         {connections.length === 0 ? (

@@ -21,6 +21,28 @@ class UserViewSet(viewsets.ModelViewSet):
             return [AllowAny()]
         return super().get_permissions()
 
+    @action(detail=False, methods=["get"])
+    def search(self, request):
+        """
+        Kullanıcı arama endpoint'i.
+        GET /api/users/search/?q=ali
+        """
+        query = request.query_params.get("q", "").strip()
+        if not query:
+            return Response([], status=status.HTTP_200_OK)
+
+        qs = (
+            self.get_queryset()
+            .filter(
+                Q(username__icontains=query)
+                | Q(first_name__icontains=query)
+                | Q(last_name__icontains=query)
+            )
+            .exclude(id=request.user.id)[:20]
+        )
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
+
     @action(detail=False, methods=["post"], permission_classes=[AllowAny])
     def register(self, request):
         serializer = RegisterSerializer(data=request.data)

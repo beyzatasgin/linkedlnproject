@@ -13,6 +13,10 @@ from .models import Profile
 
 
 def register_view(request):
+    # Eğer kullanıcı zaten giriş yapmışsa feed'e yönlendir
+    if request.user.is_authenticated:
+        return redirect("feed")
+    
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -20,6 +24,10 @@ def register_view(request):
             Profile.objects.get_or_create(user=user)
             login(request, user)
             messages.success(request, "Hoş geldiniz!")
+            # next parametresini kontrol et
+            next_url = request.GET.get("next") or request.POST.get("next")
+            if next_url:
+                return redirect(next_url)
             return redirect("feed")
     else:
         form = RegisterForm()
