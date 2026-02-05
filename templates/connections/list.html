@@ -3,6 +3,40 @@
 {% block content %}
 <h1 style="margin-top:0">Bağlantılar</h1>
 
+<form method="get" style="margin:16px 0;display:flex;gap:8px;align-items:center;">
+  <input
+    type="text"
+    name="q"
+    placeholder="Kullanıcı ara..."
+    value="{{ query }}"
+    style="flex:1;padding:8px 12px;border-radius:999px;border:1px solid var(--border);"
+  />
+  <button type="submit" class="btn btn-small">Ara</button>
+</form>
+
+{% if search_results %}
+  <div class="card" style="margin-bottom:16px;">
+    <h3 style="margin-top:0">Arama Sonuçları</h3>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+      {% for user in search_results %}
+        <li style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);border-radius:8px;padding:8px 10px;">
+          <div style="display:flex;flex-direction:column;">
+            <a href="{% url 'profile_detail' user.username %}">@{{ user.username }}</a>
+            {% if user.get_full_name %}
+              <span style="font-size:12px;color:var(--muted);">{{ user.get_full_name }}</span>
+            {% endif %}
+          </div>
+          <a class="btn btn-small" href="{% url 'connection_send' user.username %}">Bağlantı isteği gönder</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% elif query %}
+  <div class="card" style="margin-bottom:16px;">
+    <p style="margin:0;color:var(--muted);">\"{{ query }}\" için kullanıcı bulunamadı.</p>
+  </div>
+{% endif %}
+
 <div class="grid-2">
   <div class="card">
     <h3 style="margin-top:0">Gelen İstekler</h3>
